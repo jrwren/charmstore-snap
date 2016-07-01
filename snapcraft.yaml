@@ -1,0 +1,23 @@
+name: charmstore
+version: develop
+summary: store and publish juju charms.
+description: Store and publish Juju charms.
+    Runs at http://www.jujucharms.com
+confinement: strict
+
+apps:
+  charmstore:
+    daemon: simple
+    command: charmd
+    plugs: [network-bind]
+
+parts:
+  make-project:
+    plugin: make
+    source: .
+
+  charmstore:
+    plugin: go
+    source: http://gopkg.in/juju/charmstore.v5-unstable
+    go-importpath: gopkg.in/juju/charmstore.v5-unstable
+    source-type: git
